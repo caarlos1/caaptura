@@ -26,7 +26,7 @@ app.use(VueReCaptcha, {
   },
 })
 
-if (process.env.NODE_ENV === 'development')
+if (!process.env.NODE_ENV === 'development')
   app.use(VueGtag, { config: { id: CONFIG.gtag } }, router)
 
 import titleMixin from './mixins/title'

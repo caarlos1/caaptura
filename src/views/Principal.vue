@@ -5,6 +5,7 @@
     :textoTitulo="info.pagina.textoTitulo"
     :textoSub="info.pagina.textoSub"
     :rodape="info.pagina.rodape"
+    :logo="info.pagina.logo"
   >
     <template v-slot:texto>
       <div v-html="info.texto"></div>
