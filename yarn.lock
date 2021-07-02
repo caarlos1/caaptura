@@ -938,6 +938,20 @@
   dependencies:
     chalk "^4.0.0"
 
+"@gtm-support/core@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@gtm-support/core/-/core-1.0.0.tgz#2457ddd2090d93b7b0f3017791949c3c2320c60b"
+  integrity sha512-nti5xrAZYzfZ74KIHoe5KmUo+vF7wJT8km0QuzZzAu8m2DRGPPHfBke2RPR0QDlyFCy/2mdD94+hMV51D/P4GA==
+
+"@gtm-support/vue-gtm@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@gtm-support/vue-gtm/-/vue-gtm-1.0.0.tgz#192cf4ceb2fe2e6195e2243d35ced479628c5b2a"
+  integrity sha512-dk3IY48FngUfdwYIKONtsuPcnZ/s4L2qxzXvOtlPEfKHqJtk/oeF7W4unM0QbS6qNSnfNxyjLO8qz46hBGqyng==
+  dependencies:
+    "@gtm-support/core" "1.0.0"
+  optionalDependencies:
+    vue-router "^4.0.0"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -8642,11 +8656,6 @@ vue-eslint-parser@^7.6.0:
     esquery "^1.4.0"
     lodash "^4.17.15"
 
-vue-facebook-pixel@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/vue-facebook-pixel/-/vue-facebook-pixel-1.2.1.tgz#1c89dd39d736702072df80dd2e674bf9787dac93"
-  integrity sha512-fB43Wk2RtVuB/JDRwx5vCAEk2d5zYATWCuDNp7mxkUyqZQTmXXhg7Awec4AqRVPNaAvSY3tI0ErpYHuHU1kV+Q==
-
 vue-gtag@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/vue-gtag/-/vue-gtag-2.0.1.tgz#d4dc1b9cf79809c37ce844824c0f7fa97af520dd"
@@ -8684,7 +8693,7 @@ vue-recaptcha-v3@^2.0.1:
   dependencies:
     recaptcha-v3 "^1.8.0"
 
-vue-router@4:
+vue-router@4, vue-router@^4.0.0:
   version "4.0.10"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.0.10.tgz#ec8fda032949b2a31d3273170f8f376e86eb52ac"
   integrity sha512-YbPf6QnZpyyWfnk7CUt2Bme+vo7TLfg1nGZNkvYqKYh4vLaFw6Gn8bPGdmt5m4qrGnKoXLqc4htAsd3dIukICA==
