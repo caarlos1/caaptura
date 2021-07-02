@@ -1,14 +1,17 @@
 import { createApp } from 'vue'
+import { createGtm } from '@gtm-support/vue-gtm'
 import App from './App.vue'
 import router from './router.js'
 
-// Analytics
+// Google
 import VueGtag from 'vue-gtag'
-import VueFacebookPixel from 'vue-facebook-pixel'
 import { VueReCaptcha } from 'vue-recaptcha-v3'
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+
+// Informações de Configuração
+import CONFIG from '../data/config.json'
 
 const app = createApp(App)
 
@@ -16,20 +19,29 @@ app.use(router)
 app.use(VueAxios, axios)
 
 app.use(VueReCaptcha, {
-  siteKey: '6Ld3cd0UAAAAAEtD4rnSFxLQjJTMRM-J-aGfkMnK',
+  siteKey: CONFIG.reCaptcha,
   loaderOptions: {
     useRecaptchaNet: true,
     autoHideBadge: true,
   },
 })
 
-if (!process.env.NODE_ENV === 'development') {
-  app.use(VueGtag, { config: { id: 'G-SYL7H9RVB4' } }, router)
-  app.use(VueFacebookPixel)
-  app.analytics.fbq.init('1850043178484496')
-}
+if (process.env.NODE_ENV === 'development')
+  app.use(VueGtag, { config: { id: CONFIG.gtag } }, router)
 
 import titleMixin from './mixins/title'
 app.mixin(titleMixin)
+
+app.use(
+  createGtm({
+    id: CONFIG.gtm,
+    compatibility: false,
+    nonce: '2726c7f26c',
+    debug: true,
+    loadScript: true,
+    vueRouter: router,
+    trackOnNextTick: false,
+  })
+)
 
 app.mount('#app')
