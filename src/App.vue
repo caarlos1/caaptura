@@ -11,8 +11,19 @@ import './assets/css/fonts.css'
 import './assets/css/html.css'
 import './assets/css/style.css'
 
+// Analytics
+import '@/assets/js/pixel.js'
+
+// Útil
+import { isDevMode } from './util'
+
 export default {
   name: 'App',
   components: {},
+  mounted() {
+    if (!isDevMode()) {
+      this.$analytics.fbq.event('PageView')
+    }
+  },
 }
 </script>
