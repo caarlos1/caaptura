@@ -26,22 +26,22 @@ app.use(VueReCaptcha, {
   },
 })
 
-if (!process.env.NODE_ENV === 'development')
+if (!process.env.NODE_ENV === 'development') {
   app.use(VueGtag, { config: { id: CONFIG.gtag } }, router)
+  app.use(
+    createGtm({
+      id: CONFIG.gtm,
+      compatibility: false,
+      nonce: '2726c7f26c',
+      debug: true,
+      loadScript: true,
+      vueRouter: router,
+      trackOnNextTick: false,
+    })
+  )
+}
 
 import titleMixin from './mixins/title'
 app.mixin(titleMixin)
-
-app.use(
-  createGtm({
-    id: CONFIG.gtm,
-    compatibility: false,
-    nonce: '2726c7f26c',
-    debug: true,
-    loadScript: true,
-    vueRouter: router,
-    trackOnNextTick: false,
-  })
-)
 
 app.mount('#app')
