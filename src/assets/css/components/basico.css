@@ -1,0 +1,68 @@
+
+.cabecalho {
+  background-color: var(--cor-destaque);
+}
+
+.cabecalho__informacoes {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: var(--cor-texto-inverso);
+}
+
+.cabecalho__titulo {
+  font-weight: 700;
+  font-size: var(--font-size-titulo);
+  margin: 0;
+  padding: 0;
+}
+
+.cabecalho__sub {
+  font-size: var(--font-size-sub-titulo);
+  text-indent: 3px;
+}
+
+.cabecalho__logo {
+  max-height: 150px;
+}
+
+.dobra {
+  margin-top: var(--espacamento-padrao);
+  padding: 0 0 var(--espacamento-padrao) 0;
+}
+
+.texto__titulo {
+  font-size: 2.25em;
+  font-weight: bold;
+}
+
+.texto__sub {
+  font-size: 1.5em;
+}
+
+.texto__separador {
+  width: 60%;
+  height: 6px;
+  background-color: var(--cor-destaque);
+  margin: 20px 0 30px;
+}
+
+.formulario__bloco {
+  margin-top: calc(var(--espacamento-padrao) * -2.5);
+}
+
+@media (max-width: 991px) {
+  .row {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .formulario__bloco {
+    margin-top: var(--espacamento-padrao);
+  }
+}
+
+@media (max-width: 400px) {
+  .row {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

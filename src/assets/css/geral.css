@@ -1,0 +1,15 @@
+.rodape {
+  text-align: center;
+  background-color: var(--cor-destaque);
+  color: var(--cor-texto-inverso);
+}
+.rodape__texto {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.rodape__texto a {
+  text-decoration: none;
+  color: var(--cor-texto-inverso);
+  font-weight: bold;
+}

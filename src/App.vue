@@ -10,6 +10,7 @@ import './assets/css/root.css'
 import './assets/css/fonts.css'
 import './assets/css/html.css'
 import './assets/css/style.css'
+import './assets/css/geral.css'
 
 export default {
   name: 'App',
