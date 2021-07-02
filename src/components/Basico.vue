@@ -3,7 +3,7 @@
     <div class="">
       <div class="row">
         <div
-          class="col-lg-6 col-md-6 col-sm-12 offset-lg-1 cabecalho__informacoes"
+          class="col-lg-6 col-md-12 col-sm-12 offset-lg-1 cabecalho__informacoes"
         >
           <template v-if="logo">
             <img

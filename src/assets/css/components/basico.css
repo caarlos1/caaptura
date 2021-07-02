@@ -1,4 +1,3 @@
-
 .cabecalho {
   background-color: var(--cor-destaque);
 }
@@ -22,7 +21,7 @@
 }
 
 .cabecalho__logo {
-  max-height: 150px;
+  height: 140px;
 }
 
 .dobra {
@@ -64,5 +63,9 @@
   .row {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .cabecalho__logo {
+    height: auto;
+    width: 100%;
   }
 }
