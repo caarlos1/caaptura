@@ -35,7 +35,7 @@ import '../../data/style.css'
 import Info from '../../data/site.json'
 
 export default {
-  title: Info.pagina.titulo + ' - ' + Info.pagina.sub,
+  title: Info.pagina.titulo + ' - ' + Info.pagina.sub + Info.pagina.creditos,
   components: { Tema, Formulario },
   data() {
     return {
