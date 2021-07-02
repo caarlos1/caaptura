@@ -256,17 +256,18 @@ export default {
 .formulario__alerta--erro {
   background-color: transparent;
   color: var(--cor-texto-inverso);
-  box-shadow: var(--sombra-padrao);
+  box-shadow: var(--sombra-pequena);
+  border-radius: 10px;
+  border-color: transparent;
+  margin-bottom: 20px;
 }
 
 .formulario__alerta--sucesso {
-  box-shadow: var(--brilho-padrao);
-  border-color: var(--cor-destaque);
+  background-color: var(--cor-destaque);
 }
 
 .formulario__alerta--erro {
-  border-color: var(--cor-perigo);
-  box-shadow: var(--sombra-perigo);
+  background-color: var(--cor-perigo);
 }
 
 /* 
