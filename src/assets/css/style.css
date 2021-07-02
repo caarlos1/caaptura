@@ -1,0 +1,16 @@
+.btn {
+  padding: 14px 30px;
+}
+
+.btn-primary {
+  color: var(--cor-texto-inverso);
+  background-color: var(--cor-destaque);
+  box-shadow: var(--sombra-padrao);
+  border: none;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  color: var(--cor-texto-inverso);
+  background-color: var(--cor-destaque-hover);
+}
