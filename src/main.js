@@ -18,4 +18,7 @@ app.use(VueReCaptcha, {
   },
 })
 
+import titleMixin from './mixins/title'
+app.mixin(titleMixin)
+
 app.mount('#app')

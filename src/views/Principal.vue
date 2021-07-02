@@ -32,14 +32,15 @@ import Formulario from '@/components/formularios/Orcamento.vue'
 // Dinâmico
 import FormularioInputs from '../../data/formulario.json'
 import '../../data/style.css'
-import InformacoesPagina from '../../data/site.json'
+import Info from '../../data/site.json'
 
 export default {
+  title: Info.pagina.titulo + ' - ' + Info.pagina.sub,
   components: { Tema, Formulario },
   data() {
     return {
       formulario: FormularioInputs,
-      info: InformacoesPagina,
+      info: Info,
     }
   },
 }
