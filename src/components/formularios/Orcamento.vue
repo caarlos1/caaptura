@@ -138,6 +138,7 @@ export default {
 
     montarInput(input) {
       let required = input.required ? 'required' : ''
+      let tipo = input.tipo ? input.tipo : 'text'
       let tag = input.tag ? input.tag : 'input'
       let codigoInput = ''
 
@@ -151,7 +152,7 @@ export default {
       if (tag == 'input') {
         codigoInput = `
             <input
-              type="${input.tipo}"
+              type="${tipo}"
               id="form_${input.nome}"
               name="${input.nome}"
               class="form-control data-form-orc"
