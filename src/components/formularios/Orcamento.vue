@@ -58,8 +58,6 @@
 </template>
 
 <script>
-import { isDevMode } from '../../util'
-
 export default {
   data() {
     return {
@@ -111,7 +109,6 @@ export default {
         try {
           let resposta = await this.postFormulario(dados)
           if (resposta.data.sucesso) {
-            if (!isDevMode()) this.$analytics.fbq.event('Contact')
             this.alertas.push(`E-mail recebido com sucesso!`)
             formularioArea.removeChild(formularioOrcamento)
           } else {
