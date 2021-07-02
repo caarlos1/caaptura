@@ -30,7 +30,7 @@
     "nome": "cep",
     "legenda": "CEP",
     "required": false,
-    "placeholder": "(10)98765-4321",
+    "placeholder": "38770-000",
     "col": "col-md-6"
   },
   {
