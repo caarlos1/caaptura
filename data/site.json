@@ -1,0 +1,17 @@
+{
+  "pagina": {
+    "titulo": "Carlos Roberto",
+    "sub": "Desenvolvedor Web",
+    "textoTitulo": "Título Exemplo",
+    "textoSub": "Eu sou uma <b>Landing Page</b> de Conversão!",
+    "rodape": "Página desenvolvida por Carlos Roberto. Acesse <a href='https://caarlos.com' target='_blank'>caarlos.com</a> para mais informações."
+  },
+  "texto": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam orci dolor,porta non turpis sit amet, aliquet facilisis elit. Nulla porttitor portamalesuada. Curabitur sed quam quis elit lobortis convallis. Fusceblandit odio tortor, eget ornare justo euismod vitae. Morbi tristiquemagna neque, sed faucibus nibh rutrum vel. Aenean odio magna, dictum sedvolutpat vitae, varius sit amet purus.</p>",
+  "formulario": {
+    "titulo": "Orçamento Personalizado",
+    "sub": "Responda o formulário abaixo para receber um orçamento especial para o seu negócio!",
+    "botao": "Quero receber um Orçamento!",
+    "urlBotao": "https://send.caarlos.com/enviar/formulario",
+    "urlRedirect": ""
+  }
+}
