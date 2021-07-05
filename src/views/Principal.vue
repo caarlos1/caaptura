@@ -1,24 +1,24 @@
 <template>
   <tema
-    :titulo="info.pagina.titulo"
-    :sub="info.pagina.sub"
-    :textoTitulo="info.pagina.textoTitulo"
-    :textoSub="info.pagina.textoSub"
-    :rodape="info.pagina.rodape"
-    :logo="info.pagina.logo"
+    :titulo="pagina.informacoes.titulo"
+    :sub="pagina.informacoes.sub"
+    :textoTitulo="pagina.informacoes.textoTitulo"
+    :textoSub="pagina.informacoes.textoSub"
+    :rodape="pagina.informacoes.rodape"
+    :logo="pagina.informacoes.logo"
   >
     <template v-slot:texto>
-      <div v-html="info.texto"></div>
+      <div v-html="pagina.texto"></div>
     </template>
 
     <template v-slot:formulario>
       <formulario
-        :titulo="info.formulario.titulo"
-        :sub="info.formulario.sub"
-        :botao="info.formulario.botao"
-        :campos="formulario"
-        :urlBotao="info.formulario.urlBotao"
-        :urlRedirect="info.formulario.urlRedirect"
+        :titulo="pagina.formulario.titulo"
+        :sub="pagina.formulario.sub"
+        :botao="pagina.formulario.botao"
+        :campos="pagina.formulario.inputsFormulario"
+        :urlBotao="pagina.formulario.urlBotao"
+        :urlRedirect="pagina.formulario.urlRedirect"
       />
     </template>
 
@@ -29,20 +29,51 @@
 <script>
 import Tema from '@/components/Basico.vue'
 import Formulario from '@/components/formularios/Orcamento.vue'
+import axios from 'axios'
+
+import { montarTituloPagina } from '../util'
 
 // Dinâmico
-import FormularioInputs from '../../data/formulario.json'
 import '../../data/style.css'
-import Info from '../../data/site.json'
+
+import INFO_JSON from '../../data/site.json'
+let info = INFO_JSON.informacoes
 
 export default {
-  title: Info.pagina.titulo + ' - ' + Info.pagina.sub + Info.pagina.creditos,
+  async beforeMount() {
+    this.pagina = await this.obterConteudoPagina()
+    this.atualizarTitulo()
+  },
+  title: montarTituloPagina(info.titulo, ' - ', info.sub, info.creditos),
   components: { Tema, Formulario },
   data() {
     return {
-      formulario: FormularioInputs,
-      info: Info,
+      pagina: INFO_JSON,
     }
+  },
+
+  methods: {
+    async obterConteudoPagina() {
+      let dominio = window.location.hostname
+      let informacoes
+      try {
+        const req = await axios.get( `${process.env.VUE_APP_URL_CONTEUDO_PAGINA}?url=${dominio}`
+        )
+        informacoes = req.data.conteudo
+      } catch (err) {
+        informacoes = INFO_JSON
+        console.log(
+          'Erro na importação do conteúdo da página. Informações: ' + err
+        )
+      }
+      return informacoes
+    },
+    atualizarTitulo() {
+      let info = this.pagina.informacoes
+      document.title = montarTituloPagina(
+        info.titulo + ' - ' + info.sub + info.creditos
+      )
+    },
   },
 }
 </script>
