@@ -33,9 +33,6 @@ import axios from 'axios'
 
 import { montarTituloPagina } from '../util'
 
-// Dinâmico
-import '../../data/style.css'
-
 import INFO_JSON from '../../data/site.json'
 let info = INFO_JSON.informacoes
 
