@@ -40,7 +40,7 @@ import INFO_JSON from '../../data/site.json'
 let info = INFO_JSON.informacoes
 
 export default {
-  async beforeMount() {
+  async mounted() {
     this.pagina = await this.obterConteudoPagina()
     this.atualizarTitulo()
   },
@@ -57,7 +57,8 @@ export default {
       let dominio = window.location.hostname
       let informacoes
       try {
-        const req = await axios.get( `${process.env.VUE_APP_URL_CONTEUDO_PAGINA}?url=${dominio}`
+        const req = await axios.get(
+          `${process.env.VUE_APP_URL_CONTEUDO_PAGINA}?url=${dominio}`
         )
         informacoes = req.data.conteudo
       } catch (err) {
