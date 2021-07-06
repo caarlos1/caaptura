@@ -10,36 +10,42 @@ import { VueReCaptcha } from 'vue-recaptcha-v3'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-// Informações de Configuração
-import CONFIG from '../data/config.json'
-
 const app = createApp(App)
 
 app.use(router)
 app.use(VueAxios, axios)
 
-app.use(VueReCaptcha, {
-  siteKey: CONFIG.reCaptcha,
-  loaderOptions: {
-    useRecaptchaNet: true,
-    autoHideBadge: true,
-  },
-})
+// Configurações
+import { config } from './config'
+const CONFIG_PROMISE = config()
 
-if (process.env.NODE_ENV !== 'development') {
-  app.use(VueGtag, { config: { id: CONFIG.gtag } }, router)
-  app.use(
-    createGtm({
-      id: CONFIG.gtm,
-      compatibility: false,
-      nonce: '2726c7f26c',
-      debug: true,
-      loadScript: true,
-      vueRouter: router,
-      trackOnNextTick: false,
-    })
-  )
-}
+Promise.all([CONFIG_PROMISE]).then(resultado => {
+  const resposta = resultado.pop()
+  const CONFIG_TAGS = resposta
+
+  app.use(VueReCaptcha, {
+    siteKey: CONFIG_TAGS.reCaptcha,
+    loaderOptions: {
+      useRecaptchaNet: true,
+      autoHideBadge: true,
+    },
+  })
+
+  if (process.env.NODE_ENV !== 'development') {
+    app.use(VueGtag, { config: { id: CONFIG_TAGS.gtag } }, router)
+    app.use(
+      createGtm({
+        id: CONFIG_TAGS.gtm,
+        compatibility: false,
+        nonce: '2726c7f26c',
+        debug: true,
+        loadScript: true,
+        vueRouter: router,
+        trackOnNextTick: false,
+      })
+    )
+  }
+})
 
 import titleMixin from './mixins/title'
 app.mixin(titleMixin)
