@@ -8,9 +8,12 @@ export async function config() {
     const res = await axios.get(
       `${process.env.VUE_APP_URL_TAGS_PAGINA}?url=${dominio}`
     )
-    if (res.data.sucesso) return res.data.conteudo
+    if (res.data.sucesso) return res.data.conteudo.tags
     else return CONFIG.tags
   } catch (err) {
+    console.log(
+      'Erro na importação das tags da página. Informações: ' + err
+    )
     return CONFIG.tags
   }
 }
