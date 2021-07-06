@@ -8,7 +8,8 @@ export async function config() {
     const res = await axios.get(
       `${process.env.VUE_APP_URL_TAGS_PAGINA}?url=${dominio}`
     )
-    return res.data.conteudo
+    if (res.data.sucesso) return res.data.conteudo
+    else return CONFIG.tags
   } catch (err) {
     return CONFIG.tags
   }
