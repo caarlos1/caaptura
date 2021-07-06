@@ -43,6 +43,7 @@ export default {
   async mounted() {
     this.pagina = await this.obterConteudoPagina()
     this.atualizarTitulo()
+    this.atualizarEtilo()
   },
   title: montarTituloPagina(info.titulo, ' - ', info.sub, info.creditos),
   components: { Tema, Formulario },
@@ -75,6 +76,13 @@ export default {
       document.title = montarTituloPagina(
         info.titulo + ' - ' + info.sub + info.creditos
       )
+    },
+    atualizarEtilo() {
+      let root = document.documentElement
+      let estilo = this.pagina.estilo
+      estilo.forEach(variaveis => {
+        root.style.setProperty(variaveis[0], variaveis[1])
+      })
     },
   },
 }

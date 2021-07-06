@@ -10,6 +10,10 @@
     "creditos": " | by: caarlos.com"
   },
   "texto": "<p>Para mais informações entre em contado pelo formulário ao lado. </p>",
+  "estilo": [
+    ["--cor-destaque", "#413f42"],
+    ["--cor-destaque-hover", "#2c2b2d"]
+  ],
   "formulario": {
     "titulo": "Formulário de Ajuda!",
     "sub": "Responda os itens abaixo caso <b>precise de ajuda</b> ou tenha alguma dúvida sobre essa página!",
