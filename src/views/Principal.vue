@@ -60,7 +60,8 @@ export default {
         const req = await axios.get(
           `${process.env.VUE_APP_URL_CONTEUDO_PAGINA}?url=${dominio}`
         )
-        informacoes = req.data.conteudo
+        if (req.data.sucesso) informacoes = req.data.conteudo
+        else informacoes = INFO_JSON
       } catch (err) {
         informacoes = INFO_JSON
         console.log(
