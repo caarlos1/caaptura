@@ -11,8 +11,8 @@
   },
   "texto": "<p>Para mais informações entre em contado pelo formulário ao lado. </p>",
   "estilo": [
-    ["--cor-destaque", "#413f42"],
-    ["--cor-destaque-hover", "#2c2b2d"]
+    ["--cor-destaque", "#20232a"],
+    ["--cor-destaque-hover", "#15181e"]
   ],
   "formulario": {
     "titulo": "Formulário de Ajuda!",

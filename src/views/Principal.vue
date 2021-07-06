@@ -77,9 +77,11 @@ export default {
     atualizarEtilo() {
       let root = document.documentElement
       let estilo = this.pagina.estilo
-      estilo.forEach(variaveis => {
-        root.style.setProperty(variaveis[0], variaveis[1])
-      })
+      if (estilo) {
+        estilo.forEach(variaveis => {
+          root.style.setProperty(variaveis[0], variaveis[1])
+        })
+      }
     },
   },
 }
