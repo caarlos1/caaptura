@@ -18,3 +18,10 @@
 .btn-primary:disabled {
   background-color: var(--cor-destaque-hover);
 }
+
+.sublinhar {
+  color: var(--cor-texto-inverso);
+  background-color: var(--cor-destaque);
+  padding: 0 0.4em 0 0.4em;
+  font-weight: bold;
+}
