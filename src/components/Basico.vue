@@ -1,10 +1,8 @@
 <template>
-  <div class="container-fluid cabecalho">
-    <div class="">
+  <div class="cabecalho">
+    <div class="container">
       <div class="row">
-        <div
-          class="col-lg-6 col-md-12 col-sm-12 offset-lg-1 cabecalho__informacoes"
-        >
+        <div class="col-lg-7 col-md-12 col-sm-12 cabecalho__informacoes">
           <template v-if="logo">
             <img
               v-bind:src="logo"
@@ -20,32 +18,34 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="">
+  <div class="conteudo">
+    <div class="container">
       <div class="row justify-content-lg-center dobra">
-        <div class="col-lg-6 col-md-12 col-sm-12 texto__bloco">
+        <div class="col-lg-7 col-md-12 col-sm-12 texto__bloco">
           <h2 v-html="textoTitulo" class="texto__titulo"></h2>
           <h3 v-html="textoSub" class="texto__sub"></h3>
           <div class="texto__separador"></div>
           <slot name="texto"> </slot>
         </div>
 
-        <div class="col-lg-4 col-md-12 col-sm-12 formulario__bloco">
+        <div class="col-lg-5 col-md-12 col-sm-12 formulario__bloco">
           <slot name="formulario"></slot>
         </div>
       </div>
 
       <div class="row justify-content-lg-center ">
-        <div class="col-lg-10 componentes__extras">
+        <div class="col-lg-12 componentes__extras">
           <slot name="extra"> </slot>
         </div>
       </div>
     </div>
   </div>
-  <div class="container-fluid rodape">
-    <div class="row">
-      <div class="col-lg-12">
-        <div v-html="rodape" class="rodape__texto"></div>
+  <div class="rodape">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div v-html="rodape" class="rodape__texto"></div>
+        </div>
       </div>
     </div>
   </div>
