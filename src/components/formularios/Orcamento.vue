@@ -103,8 +103,13 @@ export default {
         dados.captcha = token
         dados.dominio = window.location.href
         dados.horario = new Date()
-        let ipfy = await this.axios.get('https://api.ipify.org?format=json')
-        dados.ip = ipfy.data.ip
+
+        try {
+          let ipfy = await this.axios.get('https://api.ipify.org?format=json')
+          dados.ip = ipfy.data.ip
+        } catch (err) {
+          console.log('Recurso bloqueado por ferramentas externas.')
+        }
 
         try {
           let resposta = await this.postFormulario(dados)
