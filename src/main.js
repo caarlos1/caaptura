@@ -3,6 +3,10 @@ import { createGtm } from '@gtm-support/vue-gtm'
 import App from './App.vue'
 import router from './router.js'
 
+// Vue Loading
+import VueLoading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
+
 // Google
 import VueGtag from 'vue-gtag'
 import { VueReCaptcha } from 'vue-recaptcha-v3'
@@ -14,6 +18,13 @@ const app = createApp(App)
 
 app.use(router)
 app.use(VueAxios, axios)
+
+app.use(VueLoading, {
+  color: 'var(--cor-destaque)',
+  backgroundColor: '#FFFF',
+  loader: 'dots',
+  opacity: 1,
+})
 
 // Configurações
 import { config } from './config'
