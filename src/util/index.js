@@ -9,3 +9,7 @@ export function montarTituloPagina(...textos) {
   })
   return titulo
 }
+
+export function redirectErroURL() {
+  if (!isDevMode()) window.location.href = process.env.VUE_APP_URL_REDIRECT_ERRO
+}
