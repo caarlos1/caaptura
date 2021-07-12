@@ -1,24 +1,24 @@
 <template>
   <tema
-    :titulo="pagina.informacoes.titulo"
-    :sub="pagina.informacoes.sub"
-    :textoTitulo="pagina.informacoes.textoTitulo"
-    :textoSub="pagina.informacoes.textoSub"
-    :rodape="pagina.informacoes.rodape"
-    :logo="pagina.informacoes.logo"
+    :titulo="informacoes.titulo"
+    :sub="informacoes.sub"
+    :textoTitulo="informacoes.textoTitulo"
+    :textoSub="informacoes.textoSub"
+    :rodape="informacoes.rodape"
+    :logo="informacoes.logo"
   >
     <template v-slot:texto>
-      <div v-html="pagina.texto"></div>
+      <div v-html="texto"></div>
     </template>
 
     <template v-slot:formulario>
       <formulario
-        :titulo="pagina.formulario.titulo"
-        :sub="pagina.formulario.sub"
-        :botao="pagina.formulario.botao"
-        :campos="pagina.formulario.inputsFormulario"
-        :urlBotao="pagina.formulario.urlBotao"
-        :urlRedirect="pagina.formulario.urlRedirect"
+        :titulo="formulario.titulo"
+        :sub="formulario.sub"
+        :botao="formulario.botao"
+        :campos="formulario.inputsFormulario"
+        :urlBotao="formulario.urlBotao"
+        :urlRedirect="formulario.urlRedirect"
       />
     </template>
 
@@ -31,57 +31,105 @@ import Tema from '@/components/Basico.vue'
 import Formulario from '@/components/formularios/Orcamento.vue'
 import axios from 'axios'
 
-import { montarTituloPagina } from '../util'
-
-import INFO_JSON from '../../data/site.json'
-let info = INFO_JSON.informacoes
+import { montarTituloPagina, redirectErroURL } from '../util'
 
 export default {
-  async mounted() {
-    this.pagina = await this.obterConteudoPagina()
+  async created() {
+    this.efeitoCarregarON()
+    await this.atualizarConteudoPagina()
     this.atualizarTitulo()
     this.atualizarEtilo()
+    this.efeitoCarregarOFF()
   },
-  title: montarTituloPagina(info.titulo, ' - ', info.sub, info.creditos),
   components: { Tema, Formulario },
   data() {
     return {
-      pagina: INFO_JSON,
+      loader: {},
+      informacoes: {
+        titulo: 'Página de Captura',
+        sub: 'Desenvolvida por caarlos.com',
+        textoTitulo: 'Não fica trista tá?',
+        textoSub: 'Aqui é so um ambiente de teste.',
+        rodape: 'Eu sou um incrível rodapé.',
+        logo: '',
+      },
+      texto:
+        '<p> Eu sou um pequeno texto padrão... Ninguém quer me ver! :(</p>',
+      estilo: [],
+      formulario: {
+        titulo: 'Formulário Exemplo',
+        sub: 'Um texto que convença a audiência...',
+        botao: 'Enviar Formulário!',
+        urlBotao: '',
+        urlDestino: '',
+        inputsFormulario: [
+          {
+            tag: 'input',
+            tipo: 'email',
+            nome: 'email',
+            legenda: 'E-mail',
+            required: true,
+            placeholder: 'seu@email.com.br',
+          },
+          {
+            tag: 'textarea',
+            nome: 'mensagem',
+            legenda: 'Fale qualquer coisa!',
+            required: true,
+            rows: 3,
+          },
+        ],
+      },
     }
   },
 
   methods: {
-    async obterConteudoPagina() {
-      let dominio = window.location.hostname
-      let informacoes
+    async atualizarConteudoPagina() {
       try {
+        let dominio = window.location.hostname
         const req = await axios.get(
           `${process.env.VUE_APP_URL_CONTEUDO_PAGINA}?url=${dominio}`
         )
-        if (req.data.sucesso) informacoes = req.data.conteudo
-        else informacoes = INFO_JSON
+        if (req.data.sucesso) {
+          const conteudo = req.data.conteudo
+          // Cofiguração do conteúdo.
+          this.informacoes = conteudo.informacoes
+          this.texto = conteudo.texto
+          this.estilo = conteudo.estilo
+          this.formulario = conteudo.formulario
+        } else {
+          console.log('Erro: ' + req.data.alertas[0])
+          redirectErroURL()
+        }
       } catch (err) {
-        informacoes = INFO_JSON
         console.log(
           'Erro na importação do conteúdo da página. Informações: ' + err
         )
+        redirectErroURL()
       }
-      return informacoes
     },
     atualizarTitulo() {
-      let info = this.pagina.informacoes
-      document.title = montarTituloPagina(
-        info.titulo + ' - ' + info.sub + info.creditos
-      )
+      const info = this.informacoes
+      document.title = montarTituloPagina(info.titulo + ' - ' + info.sub)
     },
     atualizarEtilo() {
-      let root = document.documentElement
-      let estilo = this.pagina.estilo
+      const root = document.documentElement
+      const estilo = this.estilo
       if (estilo) {
         estilo.forEach(variaveis => {
           root.style.setProperty(variaveis[0], variaveis[1])
         })
       }
+    },
+
+    efeitoCarregarON() {
+      this.loader = this.$loading.show()
+    },
+
+    efeitoCarregarOFF() {
+      setTimeout(() => {
+        this.loader.hide()
+      }, 2000)
     },
   },
 }
