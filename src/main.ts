@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createGtm } from '@gtm-support/vue-gtm'
 import App from './App.vue'
-import router from './router.js'
+import router from './router'
 
 // Vue Loading
 import VueLoading from 'vue-loading-overlay'
@@ -62,3 +62,4 @@ import titleMixin from './mixins/title'
 app.mixin(titleMixin)
 
 app.mount('#app')
+
