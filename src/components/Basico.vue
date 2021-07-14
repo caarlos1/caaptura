@@ -3,16 +3,16 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-7 col-md-12 col-sm-12 cabecalho__informacoes">
-          <template v-if="logo">
+          <template v-if="informacoes.logo">
             <img
-              v-bind:src="logo"
+              v-bind:src="informacoes.logo"
               class="cabecalho__logo"
-              v-bind:alt="titulo + ' - ' + sub"
+              v-bind:alt="informacoes.titulo + ' - ' + informacoes.sub"
             />
           </template>
           <template v-else>
-            <h1 v-html="titulo" class="cabecalho__titulo"></h1>
-            <h2 v-html="sub" class="cabecalho__sub"></h2>
+            <h1 v-html="informacoes.titulo" class="cabecalho__titulo"></h1>
+            <h2 v-html="informacoes.sub" class="cabecalho__sub"></h2>
           </template>
         </div>
       </div>
@@ -22,8 +22,8 @@
     <div class="container">
       <div class="row justify-content-lg-center dobra">
         <div class="col-lg-7 col-md-12 col-sm-12 texto__bloco">
-          <h2 v-html="textoTitulo" class="texto__titulo"></h2>
-          <h3 v-html="textoSub" class="texto__sub"></h3>
+          <h2 v-html="informacoes.textoTitulo" class="texto__titulo"></h2>
+          <h3 v-html="informacoes.textoSub" class="texto__sub"></h3>
           <div class="texto__separador"></div>
           <slot name="texto"> </slot>
         </div>
@@ -44,7 +44,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div v-html="rodape" class="rodape__texto"></div>
+          <div v-html="informacoes.rodape" class="rodape__texto"></div>
         </div>
       </div>
     </div>
@@ -54,16 +54,8 @@
 <script>
 export default {
   props: {
-    empresa: String,
-    logo: String,
-    titulo: String,
-    sub: String,
-    textoTitulo: String,
-    textoSub: String,
-    rodape: String,
+    informacoes: Object,
   },
-
-  components: {},
 }
 </script>
 
