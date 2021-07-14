@@ -1,25 +1,11 @@
 <template>
-  <tema
-    :titulo="informacoes.titulo"
-    :sub="informacoes.sub"
-    :textoTitulo="informacoes.textoTitulo"
-    :textoSub="informacoes.textoSub"
-    :rodape="informacoes.rodape"
-    :logo="informacoes.logo"
-  >
+  <tema :informacoes="informacoes">
     <template v-slot:texto>
       <div v-html="texto"></div>
     </template>
 
     <template v-slot:formulario>
-      <formulario
-        :titulo="formulario.titulo"
-        :sub="formulario.sub"
-        :botao="formulario.botao"
-        :campos="formulario.inputsFormulario"
-        :urlBotao="formulario.urlBotao"
-        :urlRedirect="formulario.urlRedirect"
-      />
+      <formulario :formulario="formulario" />
     </template>
 
     <template v-slot:extra> </template>
@@ -28,18 +14,17 @@
 
 <script>
 import Tema from '@/components/Basico.vue'
-import Formulario from '@/components/formularios/Orcamento.vue'
+import Formulario from '@/components/Formularios/Orcamento.vue'
 import axios from 'axios'
 
-import { montarTituloPagina, redirectErroURL } from '../util'
+import { isDevMode, montarTituloPagina, redirectErroURL, Util } from '../util'
 
 export default {
   async created() {
-    this.efeitoCarregarON()
     await this.atualizarConteudoPagina()
     this.atualizarTitulo()
     this.atualizarEtilo()
-    this.efeitoCarregarOFF()
+    if (isDevMode()) this.efeitoCarregarOFF()
   },
   components: { Tema, Formulario },
   data() {
@@ -85,20 +70,24 @@ export default {
 
   methods: {
     async atualizarConteudoPagina() {
+      this.efeitoCarregarON()
+
       try {
-        let dominio = window.location.hostname
-        const req = await axios.get(
-          `${process.env.VUE_APP_URL_CONTEUDO_PAGINA}?url=${dominio}`
+        const { data } = await axios.get(
+          `${
+            process.env.VUE_APP_URL_CONTEUDO_PAGINA
+          }?url=${Util.obterHostnamePagina()}`
         )
-        if (req.data.sucesso) {
-          const conteudo = req.data.conteudo
-          // Cofiguração do conteúdo.
+        if (data.sucesso) {
+          const conteudo = data.conteudo
           this.informacoes = conteudo.informacoes
           this.texto = conteudo.texto
           this.estilo = conteudo.estilo
           this.formulario = conteudo.formulario
+
+          this.efeitoCarregarOFF()
         } else {
-          console.log('Erro: ' + req.data.alertas[0])
+          console.log('Erro: ' + data.alertas[0])
           redirectErroURL()
         }
       } catch (err) {
