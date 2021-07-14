@@ -12,11 +12,10 @@
   padding-bottom: 10px;
 }
 
-.formulario__erros,
-.formulario__alertas {
+.formulario__notificacoes ul {
+  list-style: none;
   padding-left: 0px;
   margin: 0;
-  list-style: none;
 }
 
 .formulario__observacao {
@@ -25,8 +24,8 @@
   margin: 0;
 }
 
-.formulario__alerta--sucesso,
-.formulario__alerta--erro {
+.formulario__notificacao--sucesso,
+.formulario__notificacao--erro {
   background-color: transparent;
   color: var(--cor-texto-inverso);
   box-shadow: var(--sombra-pequena);
@@ -35,11 +34,11 @@
   margin-bottom: 20px;
 }
 
-.formulario__alerta--sucesso {
+.formulario__notificacao--sucesso {
   background-color: var(--cor-destaque);
 }
 
-.formulario__alerta--erro {
+.formulario__notificacao--erro {
   background-color: var(--cor-perigo);
 }
 
@@ -48,7 +47,7 @@
   width: 100%;
 }
 
-@media (max-width: 520px){
+@media (max-width: 520px) {
   .formulario__area {
     padding: 50px 20px;
     background-color: var(--cor-background);
