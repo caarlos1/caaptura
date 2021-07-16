@@ -48,4 +48,12 @@ export class Util {
       return ''
     }
   }
+
+  public static emitirErroConsole(erro: unknown): void {
+    if (axios.isAxiosError(erro)) {
+      const { response } = erro
+      if (response) console.log('Error:', response.data.alertas.shift())
+      else console.log(`${erro}`)
+    } else console.log(`${erro}`)
+  }
 }
