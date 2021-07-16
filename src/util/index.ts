@@ -16,16 +16,6 @@ export function redirectErroURL(): void {
   if (!isDevMode()) window.location.href = process.env.VUE_APP_URL_REDIRECT_ERRO
 }
 
-export function notificacaoFormularioFactory(
-  mensagem: string,
-  sucesso: boolean
-) {
-  return {
-    mensagem,
-    sucesso,
-  }
-}
-
 export class Util {
   public static emailValido(email: string): boolean {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
