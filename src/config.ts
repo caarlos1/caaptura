@@ -1,6 +1,7 @@
 // Informações de Configuração
 import CONFIG from '../data/tags.json'
 import axios from 'axios'
+import { Util } from './util'
 
 export async function config() {
   try {
@@ -11,9 +12,7 @@ export async function config() {
     if (res.data.sucesso) return res.data.conteudo.tags
     else return CONFIG.tags
   } catch (err) {
-    console.log(
-      'Erro na importação das tags da página. Informações: ' + err
-    )
+    Util.emitirErroConsole(err)
     return CONFIG.tags
   }
 }
