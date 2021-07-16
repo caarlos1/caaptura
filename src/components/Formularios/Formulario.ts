@@ -4,6 +4,11 @@ import {
   IFormularioElementoInput,
 } from './IFormulario'
 
+export interface FormularioNotificacao {
+  mensagem: string
+  sucesso: boolean
+}
+
 export class Formulario {
   public static obterDadosInputs() {
     let dadosInputs: IFormularioDadosInputs = {}
@@ -14,7 +19,7 @@ export class Formulario {
     arrayInputsFormularios.forEach((input: unknown): void => {
       let i = input as IFormularioDadosElementoInput
       let objeto = {
-        [i.name]: [i.value],
+        [i.name]: i.value,
       }
       dadosInputs = { ...dadosInputs, ...objeto }
     })
@@ -78,5 +83,15 @@ export class Formulario {
     }
 
     return labelInput + codigoInput
+  }
+
+  public static notificacao(
+    mensagem: string,
+    sucesso: boolean
+  ): FormularioNotificacao {
+    return {
+      mensagem,
+      sucesso,
+    }
   }
 }
