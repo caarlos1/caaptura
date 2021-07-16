@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import Notificacoes from './Notificacoes.vue'
-import { ResultadoRequisicao } from '@/util/IRequisicoes'
+import { ResultadoDasRequisicoes } from '@/util/IRequisicoes'
 
 import {
   IFormularioElementoInput,
@@ -43,7 +43,7 @@ import {
 
 import { defineComponent } from 'vue'
 import { Formulario } from './Formulario'
-import { notificacaoFormularioFactory, Util } from '@/util'
+import { Util } from '@/util'
 
 export default defineComponent({
   data() {
@@ -58,12 +58,6 @@ export default defineComponent({
 
   props: {
     formulario: Object,
-    titulo: String,
-    sub: String,
-    botao: String,
-    campos: Array,
-    urlBotao: String,
-    urlRedirect: String,
   },
 
   methods: {
@@ -71,7 +65,7 @@ export default defineComponent({
       e.preventDefault()
 
       this.notificacoes = []
-      let dados: IFormularioDadosInputs = { ...this.obterDadosInputs }
+      let dados: IFormularioDadosInputs = { ...Formulario.obterDadosInputs() }
 
       if (Util.emailValido(dados.email as string)) {
         this.ativarBotaoFormulario(false)
@@ -89,33 +83,29 @@ export default defineComponent({
             await this.enviarFormularioServidor(dados)
           )
         } catch (err) {
-          this.notificacoes.push(notificacaoFormularioFactory(err, false))
+          this.notificacoes.push(
+            Formulario.notificacao(err.response.data.alertas.shift(), false)
+          )
           this.ativarBotaoFormulario(true)
         }
         //...
       } else {
         this.notificacoes.push(
-          notificacaoFormularioFactory(
-            'Preencha corretamente o formulário!',
-            false
-          )
+          Formulario.notificacao('Preencha corretamente o formulário!', false)
         )
         this.ativarBotaoFormulario(true)
       }
     },
 
-    notificarResultadoEnvio(resultado: ResultadoRequisicao) {
-      if (resultado.sucesso) {
+    notificarResultadoEnvio(resultado: ResultadoDasRequisicoes) {
+      if (!resultado.alertas) {
         this.notificacoes.push(
-          notificacaoFormularioFactory('E-mail recebido com sucesso!', true)
+          Formulario.notificacao('E-mail recebido com sucesso!', true)
         )
         this.desativarFormulario()
       } else {
         this.notificacoes.push(
-          notificacaoFormularioFactory(
-            resultado.alertas.shift() as string,
-            false
-          )
+          Formulario.notificacao(resultado.alertas?.shift() as string, false)
         )
         this.ativarBotaoFormulario(true)
       }
@@ -123,20 +113,19 @@ export default defineComponent({
 
     async enviarFormularioServidor(
       informacoes: IFormularioDadosInputs
-    ): Promise<ResultadoRequisicao> {
+    ): Promise<ResultadoDasRequisicoes> {
       try {
         const { data } = await this.axios.post(
           this.formulario?.urlBotao as string,
           informacoes
         )
-        return data as ResultadoRequisicao
-      } catch (err) {
-        throw 'Não foi possível enviar seu e-mail.'
+        return data as ResultadoDasRequisicoes
+      } catch (erro) {
+        throw erro
       }
     },
 
     // Utilitarios do Formulário
-
     ativarBotaoFormulario(status = true): void {
       ;(<HTMLInputElement>(
         document.getElementById('formulario__enviar')
@@ -155,12 +144,6 @@ export default defineComponent({
 
     definirColunasInput(input: IFormularioElementoInput) {
       return input.col ? input.col : 'col-md-12'
-    },
-  },
-
-  computed: {
-    obterDadosInputs(): IFormularioDadosInputs {
-      return Formulario.obterDadosInputs()
     },
   },
 })
