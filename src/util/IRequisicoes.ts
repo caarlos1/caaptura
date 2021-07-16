@@ -1,5 +1,5 @@
-export interface ResultadoRequisicao {
-  sucesso: boolean
+export interface ResultadoDasRequisicoes {
+  codigo: number,
   conteudo?: unknown
-  alertas: string[]
+  alertas?: string[]
 }
