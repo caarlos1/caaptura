@@ -21,10 +21,11 @@ import { isDevMode, montarTituloPagina, redirectErroURL, Util } from '../util'
 
 export default {
   async created() {
+    this.efeitoCarregarON()
     await this.atualizarConteudoPagina()
     this.atualizarTitulo()
     this.atualizarEtilo()
-    if (isDevMode()) this.efeitoCarregarOFF()
+    this.efeitoCarregarOFF()
   },
   components: { Tema, Formulario },
   data() {
@@ -70,30 +71,21 @@ export default {
 
   methods: {
     async atualizarConteudoPagina() {
-      this.efeitoCarregarON()
-
       try {
         const { data } = await axios.get(
           `${
             process.env.VUE_APP_URL_CONTEUDO_PAGINA
           }?url=${Util.obterHostnamePagina()}`
         )
-        if (data.sucesso) {
-          const conteudo = data.conteudo
-          this.informacoes = conteudo.informacoes
-          this.texto = conteudo.texto
-          this.estilo = conteudo.estilo
-          this.formulario = conteudo.formulario
 
-          this.efeitoCarregarOFF()
-        } else {
-          console.log('Erro: ' + data.alertas[0])
-          redirectErroURL()
-        }
+        const conteudo = data.conteudo
+        this.informacoes = conteudo.informacoes
+        this.texto = conteudo.texto
+        this.estilo = conteudo.estilo
+        this.formulario = conteudo.formulario
+        //...
       } catch (err) {
-        console.log(
-          'Erro na importação do conteúdo da página. Informações: ' + err
-        )
+        Util.emitirErroConsole(err)
         redirectErroURL()
       }
     },
