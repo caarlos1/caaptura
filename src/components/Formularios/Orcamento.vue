@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import Notificacoes from './Notificacoes.vue'
-import { ResultadoDasRequisicoes } from '@/util/IRequisicoes'
+import { ResultadoDaRequisicao } from '@/util/IRequisicoes'
 
 import {
   IFormularioElementoInput,
@@ -97,7 +97,7 @@ export default defineComponent({
       }
     },
 
-    notificarResultadoEnvio(resultado: ResultadoDasRequisicoes) {
+    notificarResultadoEnvio(resultado: ResultadoDaRequisicao) {
       if (!resultado.alertas) {
         this.notificacoes.push(
           Formulario.notificacao('E-mail recebido com sucesso!', true)
@@ -113,13 +113,13 @@ export default defineComponent({
 
     async enviarFormularioServidor(
       informacoes: IFormularioDadosInputs
-    ): Promise<ResultadoDasRequisicoes> {
+    ): Promise<ResultadoDaRequisicao> {
       try {
         const { data } = await this.axios.post(
           this.formulario?.urlBotao as string,
           informacoes
         )
-        return data as ResultadoDasRequisicoes
+        return data as ResultadoDaRequisicao
       } catch (erro) {
         throw erro
       }
