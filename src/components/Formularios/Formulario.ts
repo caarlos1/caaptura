@@ -46,7 +46,7 @@ export class Formulario {
               type="${tipo}"
               id="form_${elemento.nome}"
               name="${elemento.nome}"
-              class="form-control data-form-orc"
+              class="form-control input--tema data-form-orc"
               placeholder="${elemento.placeholder}"
               ${required}
           />`
@@ -54,7 +54,7 @@ export class Formulario {
     if (tag == 'textarea') {
       codigoInput = `
           <textarea
-            class="form-control data-form-orc"
+            class="form-control input--tema data-form-orc"
             id="form_${elemento.nome}"
             name="${elemento.nome}"
             rows="${elemento.rows}"
@@ -67,7 +67,7 @@ export class Formulario {
           <select
             id="form_${elemento.nome}"
             name="${elemento.nome}"
-            class="form-select data-form-orc"
+            class="form-select input--tema data-form-orc"
           >
         `
       const selectFim = `
