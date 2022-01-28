@@ -86,7 +86,7 @@ export default {
         //...
       } catch (err) {
         Util.emitirErroConsole(err)
-        redirectErroURL()
+        // redirectErroURL()
       }
     },
     atualizarTitulo() {
